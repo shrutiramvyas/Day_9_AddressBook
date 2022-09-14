@@ -35,6 +35,26 @@ public class ContactPerson {
         int zip = scan.nextInt();
         c.add(new AdressBookClass(first_name, last_name, address, city, state, email, phoneNumber, zip));
     }
+    public void deleteRecord(){
+        boolean found=false;
+        System.out.println("Write the name which you want to delete: ");
+        String name=scan.next();
+        System.out.println("--------------------------------------");
+        Iterator<AdressBookClass> i=c.iterator();
+        while(i.hasNext()){
+            AdressBookClass a=i.next();
+            if(Objects.equals(a.getFirst_name(), name)){
+                i.remove();
+                found=true;
+            }
+        }
+        if(!found){
+            System.out.println("Record not found");
+        }
+        else{
+            System.out.println("Record deleted successfully");
+        }
+    }
 
     public void display(){
         System.out.println("==============================================");
@@ -69,16 +89,22 @@ public class ContactPerson {
     public void ask() {
         int choose;
         do {
-            System.out.println("1 for create new contact \n 2 for display\n 3 for update: ");
+            System.out.println("1 for create new contact \n 2 for search contact \n 3 for delete \n 4 for display\n 5 for update: ");
             choose = scan.nextInt();
             switch (choose) {
                 case 1:
                     create();
                     break;
                 case 2:
-                    display();
+//                    search();
                     break;
                 case 3:
+                    deleteRecord();
+                    break;
+                case 4:
+                    display();
+                    break;
+                case 5:
                     update();
                     break;
             }
